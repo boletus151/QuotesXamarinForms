@@ -34,9 +34,9 @@
 
     <StackLayout Style="{StaticResource PageContainerStyle}">
         <Button Text="Get Quotes"
-                Command="{Binding GetQuotesCommand}"></Button>
-        <ProgressBar IsVisible="{Binding IsBusy}"
-                     IsEnabled="{Binding IsBusy}"></ProgressBar>
+                Command="{Binding GetQuotesCommand}" />
+        <ActivityIndicator IsVisible="{Binding IsBusy}"
+                           IsRunning="{Binding IsBusy}" />
         <ListView ItemsSource="{Binding QuotesList}"
                   HasUnevenRows="True">
             <ListView.ItemTemplate>

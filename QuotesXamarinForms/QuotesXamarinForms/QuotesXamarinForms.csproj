@@ -44,12 +44,14 @@
     <Compile Include="Implementations\WebApiProvider.cs" />
     <Compile Include="Implementations\WebApiProviderObservable.cs" />
     <Compile Include="Interfaces\IHttpService.cs" />
+    <Compile Include="Interfaces\IStartViewModel.cs" />
     <Compile Include="Interfaces\IQuotesService.cs" />
     <Compile Include="Interfaces\IWebApiProviderObservable.cs" />
     <Compile Include="Interfaces\IWebApiProvider.cs" />
     <Compile Include="Model\Enums\HttpOperationMode.cs" />
     <Compile Include="Model\Quote.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\StartViewModelObservable.cs" />
     <Compile Include="ViewModel\StartViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="Views\MainPage.xaml.cs">

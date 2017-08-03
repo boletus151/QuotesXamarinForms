@@ -26,6 +26,7 @@ namespace QuotesXamarinForms.ViewModel
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Reactive.Linq;
     using System.Threading.Tasks;
     using System.Windows.Input;
     using GalaSoft.MvvmLight;
@@ -34,17 +35,17 @@ namespace QuotesXamarinForms.ViewModel
     using Interfaces;
     using Model;
 
-    public class StartViewModel : ViewModelBase, IStartViewModel
+    public class StartViewModelObservable : ViewModelBase, IStartViewModel
     {
         private readonly IDialogService dialogService;
-        private readonly IWebApiProvider webApiProvider;
+        private readonly IWebApiProviderObservable webApiProvider;
         private bool _isBusy;
         private ICommand getQuotesCommand;
 
         /// <summary>
         ///     Initializes a new instance of the MainViewModel class.
         /// </summary>
-        public StartViewModel(IDialogService dialogService, IWebApiProvider webApi)
+        public StartViewModelObservable(IDialogService dialogService, IWebApiProviderObservable webApi)
         {
             this.dialogService = dialogService;
             this.webApiProvider = webApi;
@@ -79,9 +80,8 @@ namespace QuotesXamarinForms.ViewModel
         {
             try
             {
-                IsBusy = true;
-                var list = await this.webApiProvider.GetQuotesAsync();
-                UpdateQuotesList(list);
+                var list = this.webApiProvider.GetQuotesAsync();
+                list.Subscribe(this.UpdateQuotesList);
             }
             catch (Exception e)
             {
@@ -95,9 +95,10 @@ namespace QuotesXamarinForms.ViewModel
 
         private void UpdateQuotesList(IEnumerable<Quote> list)
         {
+            this.QuotesList.Clear();
             foreach (var quote in list)
             {
-                QuotesList.Add(quote);
+                this.QuotesList.Add(quote);
             }
         }
     }

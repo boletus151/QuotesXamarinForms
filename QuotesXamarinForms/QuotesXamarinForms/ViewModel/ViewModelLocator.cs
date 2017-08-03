@@ -46,7 +46,7 @@ namespace QuotesXamarinForms.ViewModel
 
             RegisterServices();
             
-            SimpleIoc.Default.Register<StartViewModel>();
+            SimpleIoc.Default.Register<IStartViewModel,StartViewModelObservable>();
         }
 
         private static void RegisterServices()
@@ -54,8 +54,9 @@ namespace QuotesXamarinForms.ViewModel
             SimpleIoc.Default.Register<IDialogService, DialogService>();
             SimpleIoc.Default.Register<IHttpService, HttpService>();
             SimpleIoc.Default.Register<IWebApiProvider, WebApiProvider>();
+            SimpleIoc.Default.Register<IWebApiProviderObservable, WebApiProviderObservable>();
         }
-        public static StartViewModel StartViewModel => ServiceLocator.Current.GetInstance<StartViewModel>();
+        public static IStartViewModel StartViewModel => ServiceLocator.Current.GetInstance<IStartViewModel>();
 
         public static void Cleanup()
         {
