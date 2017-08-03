@@ -1,5 +1,5 @@
 ﻿// -------------------------------------------------------------------------------------------------------------------
-// <copyright file="Quote.cs" company="CodigoEdulis">
+// <copyright file="IWebApiProvider.cs" company="CodigoEdulis">
 //    Código Edulis 2017
 //    http://www.codigoedulis.es
 //  </copyright>
@@ -21,27 +21,21 @@
 //  
 //  </summary>
 //  --------------------------------------------------------------------------------------------------------------------
-
-namespace QuotesXamarinForms.Model
+namespace QuotesXamarinForms.Interfaces
 {
-    public class Quote
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
+    using QuotesXamarinForms.Model;
+
+    public interface IWebApiProvider
     {
-        public string Author
-        {
-            get;
-            set;
-        }
+        Task<string> AddQuoteAsync(Quote newSaying);
 
-        public string QuoteText
-        {
-            get;
-            set;
-        }
+        Task<bool> DeleteQuoteAsync(int id);
 
-        public string QuoteType
-        {
-            get;
-            set;
-        }
+        Task<Quote> GetQuoteByIdAsync(int id);
+
+        Task<IEnumerable<Quote>> GetQuotesAsync();
     }
 }

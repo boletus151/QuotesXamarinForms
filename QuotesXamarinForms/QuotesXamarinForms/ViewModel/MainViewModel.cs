@@ -14,17 +14,17 @@ namespace QuotesXamarinForms.ViewModel
     public class MainViewModel : ViewModelBase
     {
         private readonly IDialogService dialogService;
-        private readonly IQuotesService quotesService;
+        private readonly IWebApiProvider webApiProvider;
         private bool _isBusy;
         private ICommand getQuotesCommand;
 
         /// <summary>
         ///     Initializes a new instance of the MainViewModel class.
         /// </summary>
-        public MainViewModel(IDialogService dialogService, IQuotesService quotesService)
+        public MainViewModel(IDialogService dialogService, IWebApiProvider webApi)
         {
             this.dialogService = dialogService;
-            this.quotesService = quotesService;
+            this.webApiProvider = webApi;
             QuotesList = new ObservableCollection<Quote>();
             if (IsInDesignMode)
             {
@@ -32,7 +32,7 @@ namespace QuotesXamarinForms.ViewModel
                 {
                     Author = "Dummy Author",
                     QuoteType = "Dummy Type",
-                    Text = "Dummy Text"
+                    QuoteText = "Dummy QuoteText"
                 });
             }
         }
@@ -40,7 +40,7 @@ namespace QuotesXamarinForms.ViewModel
         public ObservableCollection<Quote> QuotesList { get; set; }
 
         public ICommand GetQuotesCommand
-            => getQuotesCommand ?? (getQuotesCommand = new RelayCommand(async () => await GetQuotes()));
+            => getQuotesCommand ?? (getQuotesCommand = new RelayCommand(async () => await this.GetQuotesCommandExecute()));
 
         public bool IsBusy
         {
@@ -52,12 +52,12 @@ namespace QuotesXamarinForms.ViewModel
             }
         }
 
-        private async Task GetQuotes()
+        private async Task GetQuotesCommandExecute()
         {
             try
             {
                 IsBusy = true;
-                var list = await quotesService.GetAllQuotesAsync();
+                var list = await this.webApiProvider.GetQuotesAsync();
                 UpdateQuotesList(list);
             }
             catch (Exception e)
@@ -70,7 +70,7 @@ namespace QuotesXamarinForms.ViewModel
             }
         }
 
-        private void UpdateQuotesList(IList<Quote> list)
+        private void UpdateQuotesList(IEnumerable<Quote> list)
         {
             foreach (var quote in list)
             {

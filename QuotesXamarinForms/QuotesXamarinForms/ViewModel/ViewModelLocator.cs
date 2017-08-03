@@ -44,9 +44,16 @@ namespace QuotesXamarinForms.ViewModel
             ////    SimpleIoc.Default.Register<IDataService, DataService>();
             ////}
 
-            SimpleIoc.Default.Register<IDialogService, DialogService>();
-            SimpleIoc.Default.Register<IQuotesService, QuotesService>();
+            RegisterServices();
+
             SimpleIoc.Default.Register<MainViewModel>();
+        }
+
+        private static void RegisterServices()
+        {
+            SimpleIoc.Default.Register<IDialogService, DialogService>();
+            SimpleIoc.Default.Register<IHttpService, HttpService>();
+            SimpleIoc.Default.Register<IWebApiProvider, WebApiProvider>();
         }
 
         public static MainViewModel MainViewModel => ServiceLocator.Current.GetInstance<MainViewModel>();

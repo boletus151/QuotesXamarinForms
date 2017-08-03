@@ -1,5 +1,5 @@
 ﻿// -------------------------------------------------------------------------------------------------------------------
-// <copyright file="Quote.cs" company="CodigoEdulis">
+// <copyright file="IHttpService.cs" company="CodigoEdulis">
 //    Código Edulis 2017
 //    http://www.codigoedulis.es
 //  </copyright>
@@ -21,27 +21,17 @@
 //  
 //  </summary>
 //  --------------------------------------------------------------------------------------------------------------------
-
-namespace QuotesXamarinForms.Model
+namespace QuotesXamarinForms.Interfaces
 {
-    public class Quote
+    using System.Net.Http;
+    using System.Threading.Tasks;
+
+    using QuotesXamarinForms.Model.Enums;
+
+    public interface IHttpService
     {
-        public string Author
-        {
-            get;
-            set;
-        }
+        Task<T> ExecuteQuery<T>(string url, HttpOperationMode mode, bool useTimeOut = false);
 
-        public string QuoteText
-        {
-            get;
-            set;
-        }
-
-        public string QuoteType
-        {
-            get;
-            set;
-        }
+        Task<T> ExecuteQuery<T>(string url, HttpOperationMode mode, HttpContent content, bool useTimeOut = false);
     }
 }

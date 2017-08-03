@@ -1,5 +1,5 @@
 ﻿// -------------------------------------------------------------------------------------------------------------------
-// <copyright file="Quote.cs" company="CodigoEdulis">
+// <copyright file="HttpOperationMode.cs" company="CodigoEdulis">
 //    Código Edulis 2017
 //    http://www.codigoedulis.es
 //  </copyright>
@@ -21,27 +21,14 @@
 //  
 //  </summary>
 //  --------------------------------------------------------------------------------------------------------------------
-
-namespace QuotesXamarinForms.Model
+namespace QuotesXamarinForms.Model.Enums
 {
-    public class Quote
+    public enum HttpOperationMode
     {
-        public string Author
-        {
-            get;
-            set;
-        }
+        GET,
+        POST,
+        PUT,
+        DELETE
 
-        public string QuoteText
-        {
-            get;
-            set;
-        }
-
-        public string QuoteType
-        {
-            get;
-            set;
-        }
     }
 }
