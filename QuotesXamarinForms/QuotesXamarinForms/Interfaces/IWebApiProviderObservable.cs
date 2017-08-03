@@ -1,5 +1,5 @@
 ﻿// -------------------------------------------------------------------------------------------------------------------
-// <copyright file="IHttpService.cs" company="CodigoEdulis">
+// <copyright file="IWebApiProviderObservable.cs" company="CodigoEdulis">
 //    Código Edulis 2017
 //    http://www.codigoedulis.es
 //  </copyright>
@@ -24,14 +24,19 @@
 
 namespace QuotesXamarinForms.Interfaces
 {
-    using System.Net.Http;
+    using System;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
-    using Model.Enums;
+    using Model;
 
-    public interface IHttpService
+    public interface IWebApiProviderObservable
     {
-        Task<T> ExecuteQuery<T>(string url, HttpOperationMode mode, bool useTimeOut = false);
+        Task<string> AddQuoteAsync(Quote newSaying);
 
-        Task<T> ExecuteQuery<T>(string url, HttpOperationMode mode, HttpContent content, bool useTimeOut = false);
+        Task<bool> DeleteQuoteAsync(int id);
+
+        Task<Quote> GetQuoteByIdAsync(int id);
+
+        IObservable<IEnumerable<Quote>> GetQuotesAsync();
     }
 }

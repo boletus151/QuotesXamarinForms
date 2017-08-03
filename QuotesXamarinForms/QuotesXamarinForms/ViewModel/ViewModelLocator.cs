@@ -45,8 +45,8 @@ namespace QuotesXamarinForms.ViewModel
             ////}
 
             RegisterServices();
-
-            SimpleIoc.Default.Register<MainViewModel>();
+            
+            SimpleIoc.Default.Register<StartViewModel>();
         }
 
         private static void RegisterServices()
@@ -55,8 +55,7 @@ namespace QuotesXamarinForms.ViewModel
             SimpleIoc.Default.Register<IHttpService, HttpService>();
             SimpleIoc.Default.Register<IWebApiProvider, WebApiProvider>();
         }
-
-        public static MainViewModel MainViewModel => ServiceLocator.Current.GetInstance<MainViewModel>();
+        public static StartViewModel StartViewModel => ServiceLocator.Current.GetInstance<StartViewModel>();
 
         public static void Cleanup()
         {
